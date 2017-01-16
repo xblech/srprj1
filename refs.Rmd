@@ -1,0 +1,57 @@
+---
+title: "Reflections and References"
+author: "Dylan Blechner"
+date: "January 14, 2017"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Reflections
+<br><br>
+
+## References
+<br><br>
+Strayer, Nick, and Lucy D'Agostino McGowan. "How to Make an RMarkdown Website." How to Make an RMarkdown Website. N.p., 27 Oct. 2016. Web. 01 Jan. 2017. <http://nickstrayer.me/RMarkdown_Sites_tutorial/>.
+<br><br>
+
+Hlavac, Marek. "CRAN - Package Stargazer." CRAN - Package Stargazer. The Comprehensive R Archive Network, 14 July 2015. Web. 01 Jan. 2017. <http://CRAN.R-project.org/package=stargazer>.
+<br><br>
+
+
+#### NOT MLA YET:  
+A website called StackOverflow has been helpful in answering questions. I just search for the error I am getting or the question I have in R and I always find it has been answered by someone.  
+
+[http://stackoverflow.com/](http://stackoverflow.com/)
+<br>
+  
+In Section 9.3 Recommended Git clients, we used *git-cola* since it was already on our linux system.  
+
+*Happy Git and GitHub for the useR*, Jenny Bryan, Creative Commons Attribution-NonCommercial 4.0 International License, 2016.  
+[Happy Git and GitHub for the useR](http://happygitwithr.com/)  
+
+
+
+*R Cookbook*, Paul Teetor, O'Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472, 2011.
+
+<br>
+
+
+
+
+
+
+Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables.  
+R package version 5.2. http://CRAN.R-project.org/package=stargazer  
+<br>
+http://jakeruss.com/cheatsheets/stargazer.html
+<br>
+http://stackoverflow.com/questions/39816597/stargazer-line-type
+<br>
+http://www.htmlwidgets.org/showcase_datatables.html
+<br>

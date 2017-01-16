@@ -1,0 +1,75 @@
+---
+title: "The Statistic"
+author: "Dylan Blechner"
+date: "January 14, 2017"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(stargazer)
+library(DT)
+```
+
+```{r echo=FALSE}
+AllPosmodel.reduced3  <- readRDS("AllPosmodel_reduced3.rds")
+```
+
+```{r echo=FALSE}
+#-------------------------------#
+### PRINT STATISTIC EQUATION
+# http://stackoverflow.com/questions/24173468/r-print-equation-of-linear-regression-on-the-plot-itself
+fmtdollar  <- function(x, ...) {paste0("$", formatC(abs(as.numeric(x)), format="f", digits=0, big.mark=","))}
+cf <- AllPosmodel.reduced3 %>% 
+  tidy() %>% 
+  filter(p.value <.05) %>% 
+  select(term, estimate)
+eq <- cf %>% 
+  slice(1) %>%
+  select(estimate) %>%
+  fmtdollar() %>%
+  paste0("NBA Salary = ", .)
+for(i in 2:NROW(cf)) {
+  sign <- cf %>% 
+    slice(i) %>%
+    select(estimate) %>%
+    sign()
+  dollarestimate <- cf %>% 
+    slice(i) %>%
+    select(estimate) %>%
+    fmtdollar()
+  term <- cf %>% 
+    slice(i) %>%
+    select(term)
+
+  eq <- paste0(eq, ifelse(sign==1, " + ", " - "), dollarestimate, " ", term)
+}
+```
+<br>
+
+The equation for my statistic is:
+<br>
+<br>
+
+> `r eq`  
+
+<br><br>
+
+### EXPLANATION OF MY STATISTIC
+<br><br>
+
+### EXPLANATION OF MULTIPLE LINEAR REGRESSION
+<br><br>
+
+### HOW I ARRIVED AT MY STATISTIC
+<br><br>
+
+

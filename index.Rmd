@@ -1,0 +1,50 @@
+---
+title: "Senior Project"
+author: "Dylan Blechner"
+date: "December 11, 2016"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br>
+
+## INTRODUCTION  
+<br>
+Introduction goes here...
+<br><br>
+
+### WHAT IS THE PROJECT?
+<br>
+From the West Bridgewater Senior Project handbook:  
+
+> The Senior Project allows students to engage in a personalized learning experience utilizing interdisciplinary skills and knowledge while investigating an area of personal interest.  
+
+<br>
+
+My Senior Project involves statistics, computer programming, website design, and basketball. I have created a statistic to predict the salary of NBA players based on data from previous years. By using this statistic I can compare predicted salaries of any player in the 2016-2017 season to the salary he actually received.
+<br><br>
+
+### WHY I DECIDED TO DO IT  
+<br>
+
+- basketball
+- statistics  
+- computer programming  
+- website design  
+<br><br>
+
+### THE TOOLS I USED
+<br>
+
+- R statistical programming language
+- R-Studio interface
+- Basketball-Reference.com  
+- Git version control software  
+- GitHub repository hosting service  
+<br><br>
+

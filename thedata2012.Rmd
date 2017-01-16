@@ -1,0 +1,32 @@
+---
+title: "The Data, 2012-2013"
+author: "Dylan Blechner"
+date: "January 14, 2017"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br>
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(DT)
+```
+
+### 2012-2013 NBA Season
+<br><br>
+```{r, echo=FALSE}
+myYear <- 2012
+Data.File <- "2007-2016-BBRef.csv"
+tmp.df <- Data.File %>%
+  read.csv(check.names = FALSE, stringsAsFactors=FALSE) %>%
+  tbl_df() %>%
+  filter(Year == myYear)
+
+tmp.df %>% datatable(rownames=FALSE, class="nowrap", options = list(scrollX=TRUE)) %>% 
+  formatStyle(names(tmp.df), `font-size` = '14px')
+```
+<br><br>
+

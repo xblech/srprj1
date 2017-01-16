@@ -1,0 +1,42 @@
+---
+title: "The Data"
+author: "Dylan Blechner"
+date: "January 14, 2017"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br><br>
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(DT)
+
+Data.File <- "2007-2016-BBRef.csv"
+Data.File %>%
+  read.csv(check.names = FALSE, stringsAsFactors=FALSE) %>%
+  tbl_df() %>%
+  filter(Salary>500000) %>%
+  ggplot(., aes(x=factor(Pos.x), y=Salary)) + 
+  geom_boxplot(aes(fill=Pos.x)) +
+  stat_summary(fun.y="mean", geom="point", shape=23, size=3, fill="white") +
+  ggtitle("NBA Salary Box Plots, 2008-2017, by Position")
+```
+<br><br>
+
+### HOW I OBTAINED THE DATA
+<br><br>
+
+### WHAT THE DATA MEANS
+<br><br>
+
+### ANALYZING THE DATA
+<br><br>
+
+

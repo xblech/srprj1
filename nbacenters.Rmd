@@ -1,0 +1,57 @@
+---
+title: "2016 - 2017 NBA Centers"
+author: "Dylan Blechner"
+date: "January 10, 2017"
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br><br>
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(stargazer)
+library(DT)
+```
+
+```{r echo=FALSE}
+model.reduced2  <- readRDS("Cmodel_reduced2.rds")
+```
+
+### MULTIPLE LINEAR REGRESSION OF THE NBA CENTER POSITION
+<br>
+
+```{r, echo=FALSE, results='asis'}
+model.reduced2  %>%
+  stargazer(type="html", 
+            single.row = TRUE,
+            summary=FALSE)
+```
+<br><br>
+<br><br>
+
+
+### PREDICTIONS OF THE NBA CENTER POSITION
+<br>
+```{r, echo=FALSE, results='asis'}
+Predicted.File <- "C_FITvsACTUAL.csv"
+Predicted.File %>%
+  read.csv(check.names = FALSE, stringsAsFactors=FALSE) %>%
+  tbl_df() %>%
+  select(-lwr,-upr,-No.,-Salary,-Lg,-Pos.y,-Year) %>%
+  arrange(desc(fit)) %>%
+  datatable(rownames = FALSE, class="nowrap", extensions = 'FixedColumns',
+            options = list(
+              dom = 'tp',
+              scrollX = TRUE,
+              fixedColumns = list(leftColumns = 3)
+            )) %>% 
+  formatCurrency(1:2) %>% formatRound('Ht', 3)
+
+
+```
+
+<br>
+<br>

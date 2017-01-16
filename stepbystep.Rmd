@@ -1,0 +1,202 @@
+---
+title: "Step-by-Step Instructions"
+author: "Dylan Blechner"
+date: "December 11, 2016"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(xtable)
+```
+
+## So Far
+
+So far, we have successfully read in ten years of NBA data from [basketball-reference.com](basketball-reference.com). My dataset now includes player data for each year including Career totals, Playoff data, and Career Playoff totals data. Each player data row also includes the Salary for the year following the data. This is so I can try to understand what factors from this year contribute to the salary the player gets paid in the following year.
+
+Grabbing the data has been one of the more difficult aspects of the project so far and has taken up most of our time.
+
+```{r readcsv, include=FALSE}
+DataDir <- "/home/steve/R/R Projects/NBA Salaries BBRef/Markdowns/"
+mySalaryYear <- 2016
+NBAData2016 <- read.csv(paste0(DataDir, mySalaryYear, "BBRef.csv"), check.names = FALSE)
+# tbl_df(All.Data)
+# str(All.Data)
+# summary(All.Data)
+```
+
+
+## R Coding Script Examples  
+
+
+### NBA Dataset for 2016
+
+Here I show the first nine rows and ten columns of the data table, using the **select** command:
+```{r showtable, echo=TRUE}
+NBAData2016 %>% select(1:9) %>% tbl_df
+```
+
+The 2016 data set has 366 rows and 111 columns.
+
+\newpage
+### Regression Analysis of the 2016 NBA Data by Player Position
+
+Here is an example script I am working on to calculate a multiple linear regression of Salary vs. many other statistics. 
+
+```{r, echo=TRUE, eval=FALSE}
+Player_Salary16 <- 
+  read.csv("/home/steve/R/R Projects/NBA Salaries BBRef/Data/2016BBRef.csv", check.names = FALSE)
+
+#Sample Regression for Each Position#
+#PG#
+subset(Player_Salary16, Pos.x == "PG")
+subset(Player_Salary16, Pos.x == "PG") -> PG
+PGMod <- lm(data = PG, Salary ~ `Ht` + `Wt` + `Age` + `G` + `GS` + `MP` + `FG` + `FGA` + 
+              `FG%` + `3P` + `3PA` + `3P%` + `2P` + `2PA` + `2P%` + `eFG%` + `FT` + `FTA` + 
+              `FT%` + `ORB` + `DRB` + `TRB` + `AST` + `STL` + `BLK` + `TOV` + `PF` + `PTS` +
+              `CareerG` + `CareerGS` + `CareerMP` + `CareerFG` + `CareerFGA` + `Career3P` + 
+              `Career3PA` + `Career2P` + `Career2PA` + `CareerFT` + `CareerFTA` + `CareerORB` + 
+              `CareerDRB` + `CareerTRB` + `CareerAST` + `CareerSTL` + `CareerBLK` + `CareerTOV` + 
+              `CareerPF` + `CareerPTS` + `PlayoffG` + `PlayoffGS` + `PlayoffMP` + `PlayoffFG` + 
+              `PlayoffFGA` + `PlayoffFG%` + `Playoff3P` + `Playoff3PA` + `Playoff3P%` + 
+              `Playoff2P` + `Playoff2PA` + `Playoff2P%` + `PlayoffeFG%` + `PlayoffFT` + 
+              `PlayoffFTA` + `PlayoffFT%` + `PlayoffORB` + `PlayoffDRB` + `PlayoffTRB` + 
+              `PlayoffAST` + `PlayoffSTL` + `PlayoffBLK` + `PlayoffTOV` + `PlayoffPF` + 
+              `PlayoffPTS` + `CareerPlayoffG` + `CareerPlayoffGS` + `CareerPlayoffMP` + 
+              `CareerPlayoffFG` + `CareerPlayoffFGA` + `CareerPlayoff3P` + `CareerPlayoff3PA` + 
+              `CareerPlayoff2P` + `CareerPlayoff2PA` + `CareerPlayoffFT` + `CareerPlayoffFTA` + 
+              `CareerPlayoffORB` + `CareerPlayoffDRB` + `CareerPlayoffTRB` + `CareerPlayoffAST` + 
+              `CareerPlayoffSTL` + `CareerPlayoffBLK` + `CareerPlayoffTOV` + `CareerPlayoffPF` + 
+              `CareerPlayoffPTS`)
+summary(PGMod)
+anova(PGMod)
+
+#SG#
+subset(Player_Salary16, Pos.x == "SG")
+subset(Player_Salary16, Pos.x == "SG") -> SG
+SGMod <- lm(data = SG, Salary ~ `Ht` + `Wt` + `Age` + `G` + `GS` + `MP` + `FG` + `FGA` + 
+              `FG%` + `3P` + `3PA` + `3P%` + `2P` + `2PA` + `2P%` + `eFG%` + `FT` + `FTA` + 
+              `FT%` + `ORB` + `DRB` + `TRB` + `AST` + `STL` + `BLK` + `TOV` + `PF` + `PTS` +
+              `CareerG` + `CareerGS` + `CareerMP` + `CareerFG` + `CareerFGA` + `Career3P` + 
+              `Career3PA` + `Career2P` + `Career2PA` + `CareerFT` + `CareerFTA` + `CareerORB` + 
+              `CareerDRB` + `CareerTRB` + `CareerAST` + `CareerSTL` + `CareerBLK` + `CareerTOV` + 
+              `CareerPF` + `CareerPTS` + `PlayoffG` + `PlayoffGS` + `PlayoffMP` + `PlayoffFG` + 
+              `PlayoffFGA` + `PlayoffFG%` + `Playoff3P` + `Playoff3PA` + `Playoff3P%` + 
+              `Playoff2P` + `Playoff2PA` + `Playoff2P%` + `PlayoffeFG%` + `PlayoffFT` + 
+              `PlayoffFTA` + `PlayoffFT%` + `PlayoffORB` + `PlayoffDRB` + `PlayoffTRB` + 
+              `PlayoffAST` + `PlayoffSTL` + `PlayoffBLK` + `PlayoffTOV` + `PlayoffPF` + 
+              `PlayoffPTS` + `CareerPlayoffG` + `CareerPlayoffGS` + `CareerPlayoffMP` + 
+              `CareerPlayoffFG` + `CareerPlayoffFGA` + `CareerPlayoff3P` + `CareerPlayoff3PA` + 
+              `CareerPlayoff2P` + `CareerPlayoff2PA` + `CareerPlayoffFT` + `CareerPlayoffFTA` + 
+              `CareerPlayoffORB` + `CareerPlayoffDRB` + `CareerPlayoffTRB` + `CareerPlayoffAST` + 
+              `CareerPlayoffSTL` + `CareerPlayoffBLK` + `CareerPlayoffTOV` + `CareerPlayoffPF` + 
+              `CareerPlayoffPTS`)
+summary(SGMod)
+anova(SGMod)
+
+#SF#
+subset(Player_Salary16, Pos.x == "SF")
+subset(Player_Salary16, Pos.x == "SF") -> SF
+SFMod <- lm(data = SF, Salary ~ `Ht` + `Wt` + `Age` + `G` + `GS` + `MP` + `FG` + `FGA` + 
+              `FG%` + `3P` + `3PA` + `3P%` + `2P` + `2PA` + `2P%` + `eFG%` + `FT` + `FTA` + 
+              `FT%` + `ORB` + `DRB` + `TRB` + `AST` + `STL` + `BLK` + `TOV` + `PF` + `PTS` +
+              `CareerG` + `CareerGS` + `CareerMP` + `CareerFG` + `CareerFGA` + `Career3P` + 
+              `Career3PA` + `Career2P` + `Career2PA` + `CareerFT` + `CareerFTA` + `CareerORB` + 
+              `CareerDRB` + `CareerTRB` + `CareerAST` + `CareerSTL` + `CareerBLK` + `CareerTOV` + 
+              `CareerPF` + `CareerPTS` + `PlayoffG` + `PlayoffGS` + `PlayoffMP` + `PlayoffFG` + 
+              `PlayoffFGA` + `PlayoffFG%` + `Playoff3P` + `Playoff3PA` + `Playoff3P%` + 
+              `Playoff2P` + `Playoff2PA` + `Playoff2P%` + `PlayoffeFG%` + `PlayoffFT` + 
+              `PlayoffFTA` + `PlayoffFT%` + `PlayoffORB` + `PlayoffDRB` + `PlayoffTRB` + 
+              `PlayoffAST` + `PlayoffSTL` + `PlayoffBLK` + `PlayoffTOV` + `PlayoffPF` + 
+              `PlayoffPTS` + `CareerPlayoffG` + `CareerPlayoffGS` + `CareerPlayoffMP` + 
+              `CareerPlayoffFG` + `CareerPlayoffFGA` + `CareerPlayoff3P` + `CareerPlayoff3PA` + 
+              `CareerPlayoff2P` + `CareerPlayoff2PA` + `CareerPlayoffFT` + `CareerPlayoffFTA` + 
+              `CareerPlayoffORB` + `CareerPlayoffDRB` + `CareerPlayoffTRB` + `CareerPlayoffAST` + 
+              `CareerPlayoffSTL` + `CareerPlayoffBLK` + `CareerPlayoffTOV` + `CareerPlayoffPF` + 
+              `CareerPlayoffPTS`)
+summary(SFMod)
+anova(SFMod)
+
+#PF#
+subset(Player_Salary16, Pos.x == "PF")
+subset(Player_Salary16, Pos.x == "PF") -> PF
+PFMod <- lm(data = PF, Salary ~ `Ht` + `Wt` + `Age` + `G` + `GS` + `MP` + `FG` + `FGA` + 
+              `FG%` + `3P` + `3PA` + `3P%` + `2P` + `2PA` + `2P%` + `eFG%` + `FT` + `FTA` + 
+              `FT%` + `ORB` + `DRB` + `TRB` + `AST` + `STL` + `BLK` + `TOV` + `PF` + `PTS` +
+              `CareerG` + `CareerGS` + `CareerMP` + `CareerFG` + `CareerFGA` + `Career3P` + 
+              `Career3PA` + `Career2P` + `Career2PA` + `CareerFT` + `CareerFTA` + `CareerORB` + 
+              `CareerDRB` + `CareerTRB` + `CareerAST` + `CareerSTL` + `CareerBLK` + `CareerTOV` + 
+              `CareerPF` + `CareerPTS` + `PlayoffG` + `PlayoffGS` + `PlayoffMP` + `PlayoffFG` + 
+              `PlayoffFGA` + `PlayoffFG%` + `Playoff3P` + `Playoff3PA` + `Playoff3P%` + 
+              `Playoff2P` + `Playoff2PA` + `Playoff2P%` + `PlayoffeFG%` + `PlayoffFT` + 
+              `PlayoffFTA` + `PlayoffFT%` + `PlayoffORB` + `PlayoffDRB` + `PlayoffTRB` + 
+              `PlayoffAST` + `PlayoffSTL` + `PlayoffBLK` + `PlayoffTOV` + `PlayoffPF` + 
+              `PlayoffPTS` + `CareerPlayoffG` + `CareerPlayoffGS` + `CareerPlayoffMP` + 
+              `CareerPlayoffFG` + `CareerPlayoffFGA` + `CareerPlayoff3P` + `CareerPlayoff3PA` + 
+              `CareerPlayoff2P` + `CareerPlayoff2PA` + `CareerPlayoffFT` + `CareerPlayoffFTA` + 
+              `CareerPlayoffORB` + `CareerPlayoffDRB` + `CareerPlayoffTRB` + `CareerPlayoffAST` + 
+              `CareerPlayoffSTL` + `CareerPlayoffBLK` + `CareerPlayoffTOV` + `CareerPlayoffPF` + 
+              `CareerPlayoffPTS`)
+summary(PFMod)
+anova(PFMod)
+
+#C#
+subset(Player_Salary16, Pos.x == "C")
+subset(Player_Salary16, Pos.x == "C") -> C
+CMod <- lm(data = C, Salary ~ `Ht` + `Wt` + `Age` + `G` + `GS` + `MP` + `FG` + `FGA` + 
+             `FG%` + `3P` + `3PA` + `3P%` + `2P` + `2PA` + `2P%` + `eFG%` + `FT` + `FTA` + 
+             `FT%` + `ORB` + `DRB` + `TRB` + `AST` + `STL` + `BLK` + `TOV` + `PF` + `PTS` +
+             `CareerG` + `CareerGS` + `CareerMP` + `CareerFG` + `CareerFGA` + `Career3P` + 
+             `Career3PA` + `Career2P` + `Career2PA` + `CareerFT` + `CareerFTA` + `CareerORB` + 
+             `CareerDRB` + `CareerTRB` + `CareerAST` + `CareerSTL` + `CareerBLK` + `CareerTOV` + 
+             `CareerPF` + `CareerPTS` + `PlayoffG` + `PlayoffGS` + `PlayoffMP` + `PlayoffFG` + 
+             `PlayoffFGA` + `PlayoffFG%` + `Playoff3P` + `Playoff3PA` + `Playoff3P%` + 
+             `Playoff2P` + `Playoff2PA` + `Playoff2P%` + `PlayoffeFG%` + `PlayoffFT` + 
+             `PlayoffFTA` + `PlayoffFT%` + `PlayoffORB` + `PlayoffDRB` + `PlayoffTRB` + 
+             `PlayoffAST` + `PlayoffSTL` + `PlayoffBLK` + `PlayoffTOV` + `PlayoffPF` + 
+             `PlayoffPTS` + `CareerPlayoffG` + `CareerPlayoffGS` + `CareerPlayoffMP` + 
+             `CareerPlayoffFG` + `CareerPlayoffFGA` + `CareerPlayoff3P` + `CareerPlayoff3PA` + 
+             `CareerPlayoff2P` + `CareerPlayoff2PA` + `CareerPlayoffFT` + `CareerPlayoffFTA` + 
+             `CareerPlayoffORB` + `CareerPlayoffDRB` + `CareerPlayoffTRB` + `CareerPlayoffAST` + 
+             `CareerPlayoffSTL` + `CareerPlayoffBLK` + `CareerPlayoffTOV` + `CareerPlayoffPF` + 
+             `CareerPlayoffPTS`)
+summary(CMod)
+anova(CMod)
+
+```
+
+\newpage
+## R Plot Examples of 2016 NBA Data
+
+A histogram of salaries for the `r mySalaryYear` NBA Season, for each of the 5 positions:  
+  
+  * C = Center
+* PF = Power Forward
+* PG = Point Guard
+* SF = Small Forward
+* SG = Shooting Guard
+
+The width of each salary bin is $1,000,000.
+
+
+```{r histogram, echo=FALSE}
+#Using facets:
+NBAData2016 %>% ggplot(aes(x=Salary)) + geom_histogram(binwidth=1000000, colour="black", fill="white") + 
+  facet_grid(Pos.x ~ .)
+```
+
+For the 2016-2017 season, the salary distribution for each position is skewed towards lower salaries, with outliers at the higher end. For example, LeBron James, a small forward, is the extreme value for the above **SF** plot at ~ $31 million.
+
+I can see that by taking the 2016 dataset, then filtering it by the player, LeBron James, then selecting only the columns of interest (Player name, Postion, Salary):  
+  
+```{r}
+NBAData2016 %>% filter(Player=="LeBron James") %>% select(Player, Pos.x, Salary)
+```
+
+

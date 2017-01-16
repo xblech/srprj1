@@ -1,0 +1,33 @@
+---
+title: "Salary Comparisons"
+author: "Dylan Blechner"
+date: "January 14, 2017"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<br><br>
+
+## LeBron
+<br>
+
+FIT VS ACTUAL SALARY
+<br><br>
+
+ANALYSIS OF THE DIFFERENCE BETWEEN FIT AND ACTUAL SALARY
+<br><br>
+
+## Chris Bosh
+<br>
+
+FIT VS ACTUAL SALARY
+<br><br>
+
+ANALYSIS OF THE DIFFERENCE BETWEEN FIT AND ACTUAL SALARY
+<br><br>
+
